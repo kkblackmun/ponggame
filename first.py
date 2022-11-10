@@ -34,6 +34,15 @@ ball.goto(0, 0)
 ball.dx = 2
 ball.dy = -2
 
+# Pen
+pen = turtle.Turtle()
+pen.speed(0)
+pen.color("blue")
+pen.penup()
+pen.hideturtle()
+pen.goto(0, 260)
+pen.write("Player 1: 0 Player 2: 0", align="center", font=("Courier", 24, "normal"))
+
 #let's make the paddles move!
 def paddle_1_up():
     y = paddle_1.ycor()
@@ -80,12 +89,13 @@ while True:
     #border checking now
     if ball.ycor() > 290:
         ball.sety(-290)
-        ball.setx(random.randint(-290, 290))
+        ball.setx(random.randint(-210, 210))
         ball.dx *= random.choice([-1, 1])
     
     if ball.ycor() < -290:
-        ball.sety(-290)
-        ball.dy *= -1
+        ball.sety(290)
+        ball.setx(random.randint(-210, 210))
+        ball.dx *= random.choice([-1, 1])
 
     if ball.xcor() > 390:
         ball.goto(0, 0)
