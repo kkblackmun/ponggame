@@ -1,5 +1,5 @@
 import turtle #is a module for starting games-- this is simpler for beginners
-
+import random
 wn = turtle.Screen() #creates a window
 wn.title("PongGame!")
 wn.bgcolor("green")
@@ -80,7 +80,8 @@ while True:
     #border checking now
     if ball.ycor() > 290:
         ball.sety(-290)
-        ball.dx *= -1
+        ball.setx(random.randint(-290, 290))
+        ball.dx *= random.choice([-1, 1])
     
     if ball.ycor() < -290:
         ball.sety(-290)
