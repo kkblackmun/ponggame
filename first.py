@@ -2,9 +2,14 @@ import turtle #is a module for starting games-- this is simpler for beginners
 import random
 wn = turtle.Screen() #creates a window
 wn.title("PongGame!")
-wn.bgcolor("green")
+wn.bgcolor("light blue")
 wn.setup(width=800, height=600)
-wn.tracer(0) #what is tracer?
+wn.tracer(0)
+
+#updating our scores
+score_p1 = 0
+score_p2 = 0
+
 
 #gotta make paddles
 #Paddle 1
@@ -41,7 +46,9 @@ pen.color("blue")
 pen.penup()
 pen.hideturtle()
 pen.goto(0, 260)
-pen.write("Player 1: 0 Player 2: 0", align="center", font=("Courier", 24, "normal"))
+p1= turtle.textinput("Player 1 Name", 'Enter Player 1 name: ')
+p2 = turtle.textinput("Player 2 Name", 'Enter Player 2 name: ')
+pen.write(f"{p1}: 0 {p2}: 0", align="center", font=("Courier", 24, "normal"))
 
 #let's make the paddles move!
 def paddle_1_up():
@@ -82,7 +89,7 @@ wn.onkeypress(paddle_2_down, "Down")
 
 while True:
     wn.update() #updates/restarts the screen
-
+    
     ball.setx(ball.xcor() + ball.dx)
     ball.sety(ball.ycor() + ball.dy)
 
@@ -100,11 +107,17 @@ while True:
     if ball.xcor() > 390:
         ball.goto(0, 0)
         ball.dx *= -1
+        score_p1 +=1
+        pen.clear()
+        pen.write(f"{p1}: {score_p1} {p2}: {score_p2}", align="center", font=("Courier", 24, "normal"))
         #if this occurs we also need to add one for point total
     
     if ball.xcor() < -390:
         ball.goto(0, 0)
         ball.dx *= -1
+        score_p2 += 1
+        pen.clear()
+        pen.write("{}: {} {}: {}".format(p1, score_p1, p2, score_p2), align="center", font=("Courier", 24, "normal"))
         #if this occurs we need to add one to right team's point total
     
     if (ball.xcor() > 340 and ball.xcor() < 350) and (ball.ycor() < paddle_2.ycor() + 50 and ball.ycor() > paddle_2.ycor() -40):
